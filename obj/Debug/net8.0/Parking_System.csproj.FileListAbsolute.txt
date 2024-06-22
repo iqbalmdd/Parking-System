@@ -12,3 +12,4 @@ d:\Software Enginer\Tes\NTT Digital\Parking_System\obj\Debug\net8.0\refint\Parki
 d:\Software Enginer\Tes\NTT Digital\Parking_System\obj\Debug\net8.0\Parking_System.pdb
 D:\Software Enginer\Tes\NTT Digital\Parking_System\obj\Debug\net8.0\Parking_System.genruntimeconfig.cache
 D:\Software Enginer\Tes\NTT Digital\Parking_System\obj\Debug\net8.0\ref\Parking_System.dll
+d:\Software Enginer\Tes\NTT Digital\Parking_System\obj\Debug\net8.0\Parking_System.sourcelink.json

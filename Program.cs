@@ -36,48 +36,11 @@ class Program {
 
                 // New Parking
                 case "1": 
-                    Console.WriteLine("\nEnter the type of Vehicle");
-                    Console.WriteLine("[1] Car");
-                    Console.WriteLine("[2] Motorcycle");
-                    Console.Write("Please select an option (1-2): ");
-
-                    // Input Vehicle Type
-                    var selectedType = Console.ReadLine();
-                    VehicleType type;
-                    if (selectedType == "1") {
-                        type = VehicleType.Car ;
-                    } else if (selectedType == "2")
-                    {
-                        type = VehicleType.Motorcycle;
-                    } else
-                    {
-                        Console.Write("Invalid Input\n");
-                        break;
-                    }
-
-                    // Input plateNumber
-                    Console.WriteLine("\nEnter Vehicle Registration Number");
-                    Console.WriteLine("exp: `XX-XXXX-XXX`");
-                    Console.Write("Input your plate number : ");
-                    var clientPlate = Console.ReadLine();
-
-                    PlateNumber plateNumber = parkingService.newPlateNumber(clientPlate);
-                    
-                    // Input Vehicle Colour
-                    Console.Write("\nEnter Vehicle Colour: ");
-                    var colour = Console.ReadLine();
-
-                    // Create Vehicle Object
-                    Vehicle vehicle = new Vehicle(plateNumber,type,colour);
-                    parkingService.ParkVehicle(vehicle);
+                    parkingService.newParking();
                     break;
 
                 case "2":
-                    // Input plateNumber
-                    Console.Write("\nEnter Vehicle Registration Number: ");
-                    var plateToLeave = Console.ReadLine();
-                    parkingService.RemoveVehicle(plateToLeave);
-
+                    parkingService.RemoveVehicle();
                     break;
                 case "3":
                     parkingService.DisplayStatus();

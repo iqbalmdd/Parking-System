@@ -27,31 +27,78 @@ public class ParkingService
         }
     }
 
+    public void newParking(){
+        if (parkingLot.GetAvailableSlots() == 0)
+        {
+            Console.WriteLine("Sorry parking lot is full");
+        } else
+        {
+            Console.WriteLine("\nEnter the type of Vehicle");
+            Console.WriteLine("[1] Car");
+            Console.WriteLine("[2] Motorcycle");
+            Console.Write("Please select an option (1-2): ");
+
+            // Input Vehicle Type
+            var selectedType = Console.ReadLine();
+            VehicleType type;
+            if (selectedType == "1") {
+                type = VehicleType.Car ;
+            } else if (selectedType == "2")
+            {
+                type = VehicleType.Motorcycle;
+            } else
+            {
+                Console.Write("Invalid Input\n");
+                return;
+            }
+
+            // Input plateNumber
+            Console.WriteLine("\nEnter Vehicle Registration Number");
+            Console.WriteLine("exp: `XX-XXXX-XXX`");
+            Console.Write("Input your plate number : ");
+            var clientPlate = Console.ReadLine();
+
+            PlateNumber plateNumber = newPlateNumber(clientPlate);
+            
+            // Input Vehicle Colour
+            Console.Write("\nEnter Vehicle Colour: ");
+            var colour = Console.ReadLine();
+
+            // Create Vehicle Object
+            Vehicle vehicle = new Vehicle(plateNumber,type,colour);
+            ParkVehicle(vehicle);
+        }
+    }
+
     public void ParkVehicle(Vehicle vehicle)
     {
         int slot = parkingLot.Park(vehicle);
+        
         if (slot == -1)
         {
             Console.WriteLine("Sorry parking lot is full");
         }
         else
         {
-            
             Console.WriteLine($"\nVehicle parked!");
             Console.WriteLine($"Plate Number = {vehicle.PlateNumber}");
             Console.WriteLine($"Type         = {Enum.GetName(typeof(VehicleType), vehicle.Type)}");
             Console.WriteLine($"Colour       = {vehicle.Colour}");
             Console.WriteLine($"Allocated slot number: {slot}");
+            Console.WriteLine($"Available slot: {parkingLot.GetAvailableSlots()}");
         }
     }
-    public void RemoveVehicle(string plateNumber)
+    public void RemoveVehicle()
     {
-        if (parkingLot.Leave(plateNumber))
+        // Input plateNumber
+        Console.Write("\nEnter Vehicle Registration Number: ");
+        var plateToLeave = Console.ReadLine();
+        if (parkingLot.Leave(plateToLeave))
         {
-            Console.WriteLine($"Vehicle with registration number {plateNumber} has left the parking lot");        }
+            Console.WriteLine($"Vehicle with registration number {plateToLeave} has left the parking lot");        }
         else
         {
-            Console.WriteLine($"Vehicle with registration number {plateNumber} not found");        }
+            Console.WriteLine($"Vehicle with registration number {plateToLeave} not found");        }
     }
     public void DisplayStatus()
     {
