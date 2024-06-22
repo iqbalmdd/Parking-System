@@ -1,0 +1,14 @@
+d:\Software Enginer\Tes\NTT Digital\Parking_System\bin\Debug\net8.0\Parking_System.exe
+D:\Software Enginer\Tes\NTT Digital\Parking_System\bin\Debug\net8.0\Parking_System.deps.json
+D:\Software Enginer\Tes\NTT Digital\Parking_System\bin\Debug\net8.0\Parking_System.runtimeconfig.json
+d:\Software Enginer\Tes\NTT Digital\Parking_System\bin\Debug\net8.0\Parking_System.dll
+d:\Software Enginer\Tes\NTT Digital\Parking_System\bin\Debug\net8.0\Parking_System.pdb
+d:\Software Enginer\Tes\NTT Digital\Parking_System\obj\Debug\net8.0\Parking_System.GeneratedMSBuildEditorConfig.editorconfig
+d:\Software Enginer\Tes\NTT Digital\Parking_System\obj\Debug\net8.0\Parking_System.AssemblyInfoInputs.cache
+d:\Software Enginer\Tes\NTT Digital\Parking_System\obj\Debug\net8.0\Parking_System.AssemblyInfo.cs
+d:\Software Enginer\Tes\NTT Digital\Parking_System\obj\Debug\net8.0\Parking_System.csproj.CoreCompileInputs.cache
+d:\Software Enginer\Tes\NTT Digital\Parking_System\obj\Debug\net8.0\Parking_System.dll
+d:\Software Enginer\Tes\NTT Digital\Parking_System\obj\Debug\net8.0\refint\Parking_System.dll
+d:\Software Enginer\Tes\NTT Digital\Parking_System\obj\Debug\net8.0\Parking_System.pdb
+D:\Software Enginer\Tes\NTT Digital\Parking_System\obj\Debug\net8.0\Parking_System.genruntimeconfig.cache
+D:\Software Enginer\Tes\NTT Digital\Parking_System\obj\Debug\net8.0\ref\Parking_System.dll
