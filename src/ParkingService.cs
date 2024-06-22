@@ -54,7 +54,7 @@ public class ParkingService
 
             // Input plateNumber
             Console.WriteLine("\nEnter Vehicle Registration Number");
-            Console.WriteLine("exp: `XX-XXXX-XXX`");
+            Console.WriteLine("e.g., `XX-XXXX-XXX`");
             Console.Write("Input your plate number : ");
             var clientPlate = Console.ReadLine();
 
@@ -83,23 +83,66 @@ public class ParkingService
             Console.WriteLine($"\nVehicle parked!");
             Console.WriteLine($"Plate Number = {vehicle.PlateNumber}");
             Console.WriteLine($"Type         = {Enum.GetName(typeof(VehicleType), vehicle.Type)}");
-            Console.WriteLine($"Colour       = {vehicle.Colour}");
+            Console.WriteLine($"Colour       = {vehicle.Colour.ToLower()}");
             Console.WriteLine($"Allocated slot number: {slot}");
             Console.WriteLine($"Available slot: {parkingLot.GetAvailableSlots()}");
         }
     }
-    public void RemoveVehicle()
-    {
-        // Input plateNumber
+
+
+    public void RemoveVehicle() {
         Console.Write("\nEnter Vehicle Registration Number: ");
         var plateToLeave = Console.ReadLine();
-        if (parkingLot.Leave(plateToLeave))
-        {
-            Console.WriteLine($"Vehicle with registration number {plateToLeave} has left the parking lot");        }
-        else
-        {
-            Console.WriteLine($"Vehicle with registration number {plateToLeave} not found");        }
+        
+        Vehicle vehicle = parkingLot.GetOccupiedSlots()
+                                    .FirstOrDefault(v => v.Value.PlateNumber.ToString() == plateToLeave)
+                                    .Value;
+
+        if (vehicle != null) {
+            vehicle.CheckOut = DateTime.Now;
+
+            if (vehicle.CheckOut.HasValue)
+            {
+                TimeSpan parkedDuration = vehicle.CheckOut.Value - vehicle.CheckIn;
+                double hoursParked = parkedDuration.TotalHours;
+
+                double parkingFee = CalculateParkingFee(vehicle.Type, hoursParked);
+
+                Console.WriteLine($"\nParking Details:");
+                Console.WriteLine($"Plate Number   : {vehicle.PlateNumber}");
+                Console.WriteLine($"Vehicle Type   : {Enum.GetName(typeof(VehicleType), vehicle.Type)}");
+                Console.WriteLine($"Vehicle Colour : {vehicle.Colour.ToLower()}");
+                Console.WriteLine($"CheckIn Time   : {vehicle.CheckIn}");
+                Console.WriteLine($"CheckOut Time  : {vehicle.CheckOut}");
+                Console.WriteLine($"Parked Duration: {Math.Floor(hoursParked)} hours");
+                Console.WriteLine($"Parking Fee    : {parkingFee} IDR");
+            }
+
+            if (parkingLot.Leave(plateToLeave)) {
+                Console.WriteLine($"\nVehicle with registration number {plateToLeave} has left the parking lot");
+            } else {
+                Console.WriteLine($"\nError: Vehicle with registration number {plateToLeave} could not be removed");
+            }
+        } else {
+            Console.WriteLine($"\nVehicle with registration number {plateToLeave} not found");
+        }
     }
+
+public double CalculateParkingFee(VehicleType vehicleType, double hoursParked)
+{
+    double baseRate = (vehicleType == VehicleType.Motorcycle) ? 5000 : 10000;
+    double additionalRate = (vehicleType == VehicleType.Motorcycle) ? 3000 : 5000;
+
+    if (hoursParked <= 1)
+    {
+        return baseRate;
+    }
+    else
+    {
+        return baseRate + (Math.Ceiling(hoursParked - 1) * additionalRate);
+    }
+}
+
     public void DisplayStatus()
     {
         parkingLot.Status();

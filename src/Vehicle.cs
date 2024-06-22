@@ -10,11 +10,14 @@ namespace Parking_System.src
         public PlateNumber PlateNumber { get;set;} 
         public VehicleType Type { get;set;} 
         public string Colour { get;set;}
+        public DateTime CheckIn { get;set;}
+        public DateTime? CheckOut { get;set;}
 
         public Vehicle (PlateNumber plateNumber, VehicleType type, string colour){
             PlateNumber = plateNumber;
             Type = type;
             Colour = colour;
+            CheckIn = DateTime.Now;
         }
 
     }

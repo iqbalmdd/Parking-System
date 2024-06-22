@@ -53,11 +53,11 @@ namespace Parking_System.src
 
         public void Status()
         {
-            Console.WriteLine("Slot\tRegist. No.\tType\t\tColour");
+            Console.WriteLine("Slot\tRegist. No.\tType\t\tColour\tCheck-In");
             foreach (var slot in slots)
             {
                 var vehicle = slot.Value;
-                Console.WriteLine($"{slot.Key}\t{vehicle.PlateNumber}\t{Enum.GetName(typeof(VehicleType), vehicle.Type),-15}\t{vehicle.Colour}");
+                Console.WriteLine($"{slot.Key}\t{vehicle.PlateNumber}\t{Enum.GetName(typeof(VehicleType), vehicle.Type),-15}\t{vehicle.Colour}\t{vehicle.CheckIn}");
             }
         }
 
