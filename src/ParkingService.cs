@@ -30,7 +30,7 @@ public class ParkingService
     public void newParking(){
         if (parkingLot.GetAvailableSlots() == 0)
         {
-            Console.WriteLine("Sorry parking lot is full");
+            Console.WriteLine("\n==Sorry parking lot is full==");
         } else
         {
             Console.WriteLine("\nEnter the type of Vehicle");
@@ -105,16 +105,87 @@ public class ParkingService
         parkingLot.Status();
     }
 
+    public void FindYourCar(){
+        Console.Write("Input your plate number : ");
+        var clientPlate = Console.ReadLine();
+
+        int yourslot = parkingLot.FindSlotByPlateNumber(clientPlate);
+        if (yourslot != -1)
+        {
+            Console.WriteLine($"You Park in slot {yourslot}");
+        } else {
+            Console.Write("\nNot found, Please Input the Correct Plate Number");
+        }
+        
+    }
+
+    public void Report(){
+        Console.WriteLine("\nEnter the type of Report");
+        Console.WriteLine("[1] Plate Number");
+        Console.WriteLine("[2] Vehicle Type");
+        Console.WriteLine("[3] Colour");
+        Console.Write("Please select an option: ");
+        var selectedReport = Console.ReadLine();
+        switch (selectedReport) {
+            case "1":
+                Console.WriteLine("\nEnter type of Plate Number");
+                Console.WriteLine("[1] Odd Plate Number");
+                Console.WriteLine("[2] Even Plate Number");
+                Console.Write("Please select an option: ");
+                var plateType = Console.ReadLine();
+                switch (plateType) {
+                    case "1":
+                        ReportOddEvenPlateNumbers(true);
+                        break;
+                    case "2":
+                        ReportOddEvenPlateNumbers(false);
+                        break;
+                    default:
+                        Console.WriteLine("Invalid option!");
+                        break;
+                }
+                break;
+            case "2":
+                Console.WriteLine("\nEnter type of Vehicle");
+                Console.WriteLine("[1] Car");
+                Console.WriteLine("[2] Motorcycle");
+                Console.Write("Please select an option: ");
+                var VType = Console.ReadLine();
+                switch (VType) {
+                    case "1":
+                        ReportVehicleTypes(VehicleType.Car);
+                        break;
+                    case "2":
+                        ReportVehicleTypes(VehicleType.Motorcycle);
+                        break;
+                    default:
+                        Console.WriteLine("Invalid option!");
+                        break;
+                }
+                break;
+            case "3":
+                Console.Write("\nEnter Vehicle Colour : ");
+                var VehicleColour = Console.ReadLine();
+                ReportVehicleColors(VehicleColour);
+                break;
+            default:
+                Console.WriteLine("Invalid option!");
+                break;
+        }
+    }
+
     public void ReportVehicleColors(string vehicleColour)
     {
         var occupiedSlots = parkingLot.GetOccupiedSlots();
 
         var vehiclesOfColor = occupiedSlots.Values.Where(v => v.Colour.Equals(vehicleColour, StringComparison.OrdinalIgnoreCase)).ToList();
 
-        Console.WriteLine($"Vehicles with color '{vehicleColour}':");
+        Console.WriteLine($"\nVehicles with color '{vehicleColour}':");
+        Console.WriteLine("Slot\tRegist No.");
         foreach (var vehicle in vehiclesOfColor)
         {
-            Console.WriteLine(vehicle.PlateNumber);
+            int slot = parkingLot.FindSlotByPlateNumber(vehicle.PlateNumber.ToString());
+            Console.WriteLine($"{slot}\t{vehicle.PlateNumber}");
         }
     }
 

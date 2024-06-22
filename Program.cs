@@ -10,97 +10,50 @@ class Program {
         int Lots = int.Parse(Console.ReadLine());
         parkingService.CreateParkingLot(Lots);
 
-        // Will be deleted
-        Vehicle vehicle1 = new Vehicle(new PlateNumber("A",1111,"AA"),VehicleType.Car,"Red");
-        Vehicle vehicle2 = new Vehicle(new PlateNumber("B",2222,"BB"),VehicleType.Motorcycle,"White");
-        Vehicle vehicle3 = new Vehicle(new PlateNumber("C",3333,"CC"),VehicleType.Car,"Green");
-        Vehicle vehicle4 = new Vehicle(new PlateNumber("D",4444,"DD"),VehicleType.Motorcycle,"Blue");
-        Vehicle vehicle5 = new Vehicle(new PlateNumber("E",5555,"EE"),VehicleType.Car,"WhItE");
-        parkingService.ParkVehicle(vehicle1);
-        parkingService.ParkVehicle(vehicle2);
-        parkingService.ParkVehicle(vehicle3);
-        parkingService.ParkVehicle(vehicle4);
-        parkingService.ParkVehicle(vehicle5);
+        // Dummy Data (Lots has to = 5 to use this dummy)
+        if (Lots == 5) {
+            Vehicle vehicle1 = new Vehicle(new PlateNumber("A",1111,"AA"),VehicleType.Car,"Red");
+            Vehicle vehicle2 = new Vehicle(new PlateNumber("B",2222,"BB"),VehicleType.Motorcycle,"White");
+            Vehicle vehicle3 = new Vehicle(new PlateNumber("C",3333,"CC"),VehicleType.Car,"Green");
+            Vehicle vehicle4 = new Vehicle(new PlateNumber("DD",4444,"DD"),VehicleType.Motorcycle,"Blue");
+            Vehicle vehicle5 = new Vehicle(new PlateNumber("EE",5555,"EE"),VehicleType.Car,"WhItE");
+            parkingService.ParkVehicle(vehicle1);
+            parkingService.ParkVehicle(vehicle2);
+            parkingService.ParkVehicle(vehicle3);
+            parkingService.ParkVehicle(vehicle4);
+            parkingService.ParkVehicle(vehicle5);
+        }
+        
 
         while(true){
             Console.WriteLine("\n=====Menu=====");
             Console.WriteLine("[1] Park Vehicle");
             Console.WriteLine("[2] Remove Vehicle");
-            Console.WriteLine("[3] Display Status");
-            Console.WriteLine("[4] Report");
+            Console.WriteLine("[3] Find Your Vehicle");
+            Console.WriteLine("[4] Display Status");
+            Console.WriteLine("[5] Report");
             Console.WriteLine("[0] Exit");
 
             Console.Write("Please select number in option : ");
             var selectedNumber = Console.ReadLine();
             switch(selectedNumber){
 
-                // New Parking
                 case "1": 
                     parkingService.newParking();
                     break;
-
                 case "2":
                     parkingService.RemoveVehicle();
                     break;
                 case "3":
-                    parkingService.DisplayStatus();
+                    parkingService.FindYourCar();
                     break;
                 case "4":
-                Console.WriteLine("\nEnter the type of Report");
-                Console.WriteLine("[1] Plate Number");
-                Console.WriteLine("[2] Vehicle Type");
-                Console.WriteLine("[3] Colour");
-                Console.Write("Please select an option: ");
-                var selectedReport = Console.ReadLine();
-                switch (selectedReport) {
-                    case "1":
-                            Console.WriteLine("\nEnter type of Plate Number");
-                            Console.WriteLine("[1] Odd Plate Number");
-                            Console.WriteLine("[2] Even Plate Number");
-                            Console.Write("Please select an option: ");
-                            var plateType = Console.ReadLine();
-                            switch (plateType) {
-                                case "1":
-                                    parkingService.ReportOddEvenPlateNumbers(true);
-                                    break;
-                                case "2":
-                                    parkingService.ReportOddEvenPlateNumbers(false);
-                                    break;
-                                default:
-                                    Console.WriteLine("Invalid option!");
-                                    break;
-                            }
-                            break;
-                    case "2":
-                            Console.WriteLine("\nEnter type of Vehicle");
-                            Console.WriteLine("[1] Car");
-                            Console.WriteLine("[2] Motorcycle");
-                            Console.Write("Please select an option: ");
-                            var VType = Console.ReadLine();
-                            switch (VType) {
-                                case "1":
-                                    parkingService.ReportVehicleTypes(VehicleType.Car);
-                                    break;
-                                case "2":
-                                    parkingService.ReportVehicleTypes(VehicleType.Motorcycle);
-                                    break;
-                                default:
-                                    Console.WriteLine("Invalid option!");
-                                    break;
-                            }
-                            break;
-                    case "3":
-                            Console.Write("\nEnter Vehicle Colour : ");
-                            var VehicleColour = Console.ReadLine();
-                            parkingService.ReportVehicleColors(VehicleColour);
-                            break;
-                    default:
-                            Console.WriteLine("Invalid option!");
-                            break;
-                }
-                break;
+                    parkingService.DisplayStatus();
+                    break;
+                case "5":
+                    parkingService.Report();
+                    break;
                 case "0":
-                    // Exit the program
                     Console.WriteLine("Exiting program...");
                     return;
                 default:
